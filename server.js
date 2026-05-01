@@ -17,11 +17,12 @@ app.use(cors({
   credentials: true,
 }));
 app.use(session({
-  secret: process.env.SESSION_SECRET || "change-me",
+  secret: process.env.SESSION_SECRET,
   resave: false,
   saveUninitialized: false,
-  store: new MongoStore({
-    mongoUrl: process.env.MONGODB_STRING})
+  store: MongoStore.create({
+    mongoUrl: process.env.MONGODB_STRING
+  })
 }));
 
 // ── Serve frontend ────────────────────────────────────────────
