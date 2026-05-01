@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DevCourse – Learn Web Development</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" type="text/css" href="./index.css">
+</head>
+<body>
+
+<!-- Notification -->
+<div id="notif"></div>
+
+<!-- Nav -->
+<nav>
+  <div class="nav-inner">
+    <button class="nav-logo" onclick="navigate('home')">
+      <span class="dot">●</span> DevCourse
+    </button>
+    <div class="nav-links" id="nav-links"></div>
+  </div>
+</nav>
+
+<!-- ══════════════════ HOME ══════════════════ -->
+<div id="page-home" class="page">
+  <section class="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-content">
+      <div class="hero-badge">6 Professional Courses</div>
+      <h1 class="hero-title">Master Web<br><span class="accent">Development</span></h1>
+      <p class="hero-sub">From HTML basics to full-stack TypeScript. Structured courses built by developers, for developers.</p>
+      <div class="hero-btns">
+        <button class="btn-primary" onclick="navigate('register')">Start Learning Free</button>
+        <button class="btn-ghost" onclick="navigate('courses')">Browse Courses →</button>
+      </div>
+    </div>
+    <div class="hero-cards" id="hero-cards"></div>
+  </section>
+
+  <section class="stats-bar">
+    <div class="stat-item"><div class="stat-num">1,500+</div><div class="stat-label">Students enrolled</div></div>
+    <div class="stat-item"><div class="stat-num">6</div><div class="stat-label">Expert courses</div></div>
+    <div class="stat-item"><div class="stat-num">91</div><div class="stat-label">Total lessons</div></div>
+    <div class="stat-item"><div class="stat-num">4.9★</div><div class="stat-label">Average rating</div></div>
+  </section>
+
+  <section class="feature-section">
+    <h2 class="section-title">Why DevCourse?</h2>
+    <div class="features-grid">
+      <div class="feature-card"><div class="feature-icon">🎯</div><h3 class="feature-title">Project-based</h3><p class="feature-desc">Every course ends with a real project you can add to your portfolio.</p></div>
+      <div class="feature-card"><div class="feature-icon">⚡</div><h3 class="feature-title">Learn at your pace</h3><p class="feature-desc">No deadlines. Access lessons anytime, replay as often as you need.</p></div>
+      <div class="feature-card"><div class="feature-icon">🧭</div><h3 class="feature-title">Structured paths</h3><p class="feature-desc">Curated course order takes you from zero to full-stack developer.</p></div>
+      <div class="feature-card"><div class="feature-icon">🤝</div><h3 class="feature-title">Community</h3><p class="feature-desc">Join thousands of students. Ask questions, share progress, get feedback.</p></div>
+    </div>
+  </section>
+
+  <section class="cta-section">
+    <h2 class="cta-title">Ready to build the web?</h2>
+    <p class="cta-sub">Join 1,500+ students and start your first course today — completely free.</p>
+    <button class="btn-primary" style="font-size:1.1rem;padding:.9rem 2.5rem;" onclick="navigate('register')">Create Free Account</button>
+  </section>
+</div>
+
+<!-- ══════════════════ LOGIN ══════════════════ -->
+<div id="page-login" class="page">
+  <div class="auth-wrap">
+    <div class="auth-card">
+      <h2 class="auth-title">Welcome back</h2>
+      <p class="auth-sub">Log in to continue learning</p>
+      <div class="form">
+        <label>Email</label>
+        <input id="login-email" type="email" placeholder="you@example.com" />
+        <label>Password</label>
+        <input id="login-password" type="password" placeholder="••••••••" />
+        <div class="error-msg" id="login-error"></div>
+        <button class="btn-primary" style="width:100%;margin-top:.5rem;" onclick="doLogin()">Log In</button>
+      </div>
+      <p class="auth-switch">Don't have an account? <button class="link-btn" onclick="navigate('register')">Sign up free</button></p>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════ REGISTER ══════════════════ -->
+<div id="page-register" class="page">
+  <div class="auth-wrap">
+    <div class="auth-card">
+      <h2 class="auth-title">Create account</h2>
+      <p class="auth-sub">Start your learning journey today</p>
+      <div class="form">
+        <label>Full Name</label>
+        <input id="reg-name" type="text" placeholder="Alex Johnson" />
+        <label>Email</label>
+        <input id="reg-email" type="email" placeholder="you@example.com" />
+        <label>Password</label>
+        <input id="reg-password" type="password" placeholder="Min. 6 characters" />
+        <label>Confirm Password</label>
+        <input id="reg-confirm" type="password" placeholder="Repeat password" />
+        <div class="error-msg" id="reg-error"></div>
+        <button class="btn-primary" style="width:100%;margin-top:.5rem;" onclick="doRegister()">Create Account</button>
+      </div>
+      <p class="auth-switch">Already have an account? <button class="link-btn" onclick="navigate('login')">Log in</button></p>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════ COURSES ══════════════════ -->
+<div id="page-courses" class="page">
+  <div class="page-wrap">
+    <div class="page-header">
+      <h1 class="page-title">All Courses</h1>
+      <p class="page-sub">From HTML basics to advanced TypeScript — pick your path.</p>
+      <div class="filters" id="level-filters"></div>
+    </div>
+    <div class="courses-grid" id="courses-grid"></div>
+  </div>
+</div>
+
+<!-- ══════════════════ COURSE DETAIL ══════════════════ -->
+<div id="page-detail" class="page">
+  <div class="detail-wrap">
+    <button class="back-btn" onclick="navigate('courses')">← Back to Courses</button>
+    <div class="detail-card">
+      <div class="detail-hero" id="detail-hero"></div>
+      <div class="detail-body">
+        <div class="detail-main" id="detail-main"></div>
+        <div class="detail-side">
+          <div class="detail-side-card" id="detail-side"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════ DASHBOARD ══════════════════ -->
+<div id="page-dashboard" class="page">
+  <div class="page-wrap">
+    <div class="dash-header">
+      <div>
+        <h1 class="page-title" id="dash-greeting"></h1>
+        <p class="page-sub" id="dash-joined"></p>
+      </div>
+      <button class="btn-primary" onclick="navigate('courses')">Browse Courses</button>
+    </div>
+    <div class="dash-stats" id="dash-stats"></div>
+    <h2 class="section-heading" style="margin-bottom:1.25rem;">My Courses</h2>
+    <div id="dash-courses"></div>
+  </div>
+</div>
+
+<!-- ══════════════════ PROFILE ══════════════════ -->
+<div id="page-profile" class="page">
+  <div class="page-wrap">
+    <h1 class="page-title">Profile</h1>
+    <div id="profile-content"></div>
+  </div>
+</div>
+<script src="./app.js"></script>
+</body>
+</html>
