@@ -18,21 +18,18 @@ app.use(cors({
 }));
 const isProduction = process.env.NODE_ENV === 'production';
 app.use(session({
-  // 1. Change the name to hide the tech stack
-  name: 'app_session_id', 
-  
-  // 2. Use a strong secret (remove the hardcoded fallback)
-  secret: process.env.SESSION_SECRET, 
-  
+  // 1. Point to your MongoDB
+  store: MongoStore.create({ 
+    mongoUrl: process.env.MONGODB_STRING,
+    // This ensures the session is saved to the DB before the warning triggers
+    autoRemove: 'native' 
+  }),
+  secret: process.env.SESSION_SECRET,
   resave: false,
   saveUninitialized: false,
-  
   cookie: {
-    httpOnly: true, // Prevents JavaScript from reading the cookie
-    secure: isProduction, // ONLY send over HTTPS in production
-    sameSite: 'lax', // Protects against CSRF
-    maxAge: 7 * 24 * 60 * 60 * 1000,
-    domain: isProduction ? 'yourdomain.com' : undefined // Scope the cookie
+    secure: process.env.NODE_ENV === 'production',
+    httpOnly: true,
   }
 }));
 
