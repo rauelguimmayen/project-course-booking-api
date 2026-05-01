@@ -6,6 +6,7 @@ const path         = require("path");
 const connectDB    = require("./config/db");
 const authRoutes   = require("./routes/auth");
 const courseRoutes = require("./routes/courses");
+const MongoStore = require('connect-mongo')(session);
 
 const app = express();
 
@@ -17,9 +18,10 @@ app.use(cors({
 }));
 app.use(session({
   secret: process.env.SESSION_SECRET || "change-me",
-  resave: false,
-  saveUninitialized: false,
-  cookie: { httpOnly: true, maxAge: 7 * 24 * 60 * 60 * 1000 },
+  store: new MongoStore(options)
+ // resave: false,
+//  saveUninitialized: false,
+//  cookie: { httpOnly: true, maxAge: 7 * 24 * 60 * 60 * 1000 },
 }));
 
 // ── Serve frontend ────────────────────────────────────────────
