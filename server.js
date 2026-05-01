@@ -6,7 +6,7 @@ const path         = require("path");
 const connectDB    = require("./config/db");
 const authRoutes   = require("./routes/auth");
 const courseRoutes = require("./routes/courses");
-const MongoStore = require('connect-mongo');
+const MongoStore   = require("connect-mongo");
 
 const app = express();
 
