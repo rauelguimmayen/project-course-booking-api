@@ -21,7 +21,7 @@ app.use(session({
   resave: false,
   saveUninitialized: false,
   store: MongoStore.create({
-    mongoUrl: MONGODB_STRING,})
+    mongoUrl: process.env.MONGODB_STRING})
 }));
 
 // ── Serve frontend ────────────────────────────────────────────
