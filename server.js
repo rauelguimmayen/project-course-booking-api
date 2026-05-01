@@ -20,7 +20,7 @@ app.use(session({
   secret: process.env.SESSION_SECRET || "change-me",
   resave: false,
   saveUninitialized: false,
-  store: MongoStore.create({
+  store: new MongoStore({
     mongoUrl: process.env.MONGODB_STRING})
 }));
 
