@@ -80,7 +80,7 @@ async function doLogin() {
     showErr(errEl, err.error || "Login failed.");
   }
 }
-const { validateEmail } = require("./middleware/auth");
+
 async function doRegister() {
   const name    = document.getElementById("reg-name").value.trim();
   const emailInput   = document.getElementById("reg-email").value.trim();
@@ -89,10 +89,6 @@ async function doRegister() {
   const errEl   = document.getElementById("reg-error");
   errEl.classList.remove("visible");
   if (!name)            return showErr(errEl, "Please enter your name.");
-  emailInput.addEventListener("input", () => {
-    const isValid = validateEmail(emailInput.value);
-    emailInput.style.borderColor = isValid ? "green" : "red";
-  });
   if (pass.length < 6)  return showErr(errEl, "Password must be at least 6 characters.");
   if (pass !== confirm) return showErr(errEl, "Passwords don't match.");
   try {
