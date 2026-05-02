@@ -10,10 +10,11 @@ const MongoStore   = require("connect-mongo").default;
 const mongoose     = require("mongoose");
 const app = express();
 
+app.set("trust proxy", 1);
 // ── Middleware ────────────────────────────────────────────────
 app.use(express.json());
 app.use(cors({
-  origin: "http://localhost:3000",
+  origin: process.env.CLIENT_ORIGIN,
   credentials: true,
 }));
 const isProduction = process.env.NODE_ENV === 'production';
@@ -21,8 +22,7 @@ app.use(session({
   // 1. Point to your MongoDB
   store: new MongoStore({ 
     mongoUrl: process.env.MONGODB_STRING,
-    // This ensures the session is saved to the DB before the warning triggers
-    autoRemove: 'native' 
+    ttl: 60 * 60 * 24,
   }),
   secret: process.env.SESSION_SECRET,
   resave: false,
