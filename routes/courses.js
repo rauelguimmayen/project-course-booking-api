@@ -10,7 +10,7 @@ router.get("/", courseController.getAllCourse);
 // GET /api/courses/:id
 router.get("/:id", courseController.findCourse);
 
-/*// POST /api/courses/:id/enroll
+// POST /api/courses/:id/enroll
 router.post("/:id/enroll", requireAuth, async (req, res) => {
   const courseId = Number(req.params.id);
   try {
@@ -29,10 +29,10 @@ router.post("/:id/enroll", requireAuth, async (req, res) => {
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
-});*/
+});
 
 // POST /api/courses/:id/unenroll
-/*router.post("/:id/unenroll", requireAuth, async (req, res) => {
+router.post("/:id/unenroll", requireAuth, async (req, res) => {
   const courseId = Number(req.params.id);
   try {
     const course = await Course.findOne({ id: courseId });
@@ -49,6 +49,6 @@ router.post("/:id/enroll", requireAuth, async (req, res) => {
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
-});*/
+});
 
 module.exports = router;
