@@ -1,5 +1,6 @@
 const User = require("../models/User");
 
+
 const requireAuth = async (req, res, next) => {
   const email = req.session?.userEmail;
   if (!email) return res.status(401).json({ error: "Not authenticated." });
@@ -13,9 +14,10 @@ const requireAuth = async (req, res, next) => {
   }
 };
 
-function validateEmail(email) {
+/*function validateEmail(email) {
   if (!email || typeof email !== "string") {
-    return { valid: false, message: "Email is required." };
+    return { valid: false, notification.notify(`Email is required.`)};
+   // return { valid: false, message: "Email is required." };
   }
 
   const trimmed = email.trim();
@@ -24,7 +26,7 @@ function validateEmail(email) {
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
   if (!emailRegex.test(trimmed)) {
-    return { valid: false, message: "Invalid email format." };
+    return { valid: false, notification.notify("Invalid email format.")};
   }
 
   if (trimmed.length > 254) {
@@ -32,5 +34,5 @@ function validateEmail(email) {
   }
 
   return { valid: true, message: "Email is valid." };
-}
-module.exports = {requireAuth , validateEmail};
+}*/
+module.exports = requireAuth;

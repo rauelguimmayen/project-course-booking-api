@@ -35,6 +35,21 @@ function notify(msg, type = "success") {
   el._t = setTimeout(() => { el.style.display = "none"; }, 3000);
 }
 
+// ═══════════════ EMAIL VALIDATION ═══════════════
+function validateEmail(email) {
+  if (!email || typeof email !== "string") return false;
+  const val = email.trim();
+  return (
+    val.length > 0 &&
+    val.length <= 254 &&
+    /@/.test(val) &&
+    val.split("@").length === 2 &&
+    val.split("@")[1].length > 0 &&
+    /\.[a-zA-Z]{2,}$/.test(val) &&
+    /^[^\s@]+@[^\s@]+$/.test(val)
+  );
+}   
+
 // ═══════════════ NAVIGATION ═══════════════
 function navigate(page) {
   document.querySelectorAll(".page").forEach(p => p.classList.remove("active"));
@@ -89,6 +104,10 @@ async function doRegister() {
   const errEl   = document.getElementById("reg-error");
   errEl.classList.remove("visible");
   if (!name)            return showErr(errEl, "Please enter your name.");
+  emailInput.addEventListener("input", () => {
+    const isValid = validateEmail(emailInput.value);
+    emailInput.style.borderColor = isValid ? "green" : "red" && showErr(errEl, err.error || "Invalid email format.");
+  });
   if (pass.length < 6)  return showErr(errEl, "Password must be at least 6 characters.");
   if (pass !== confirm) return showErr(errEl, "Passwords don't match.");
   try {
