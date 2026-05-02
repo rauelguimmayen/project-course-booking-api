@@ -15,18 +15,25 @@ const requireAuth = async (req, res, next) => {
 };
 
 // ═══════════════ EMAIL VALIDATION ═══════════════
-const validateEmail = async (req, res) => {
-  if (!email || typeof email !== "string") return false;
-  const val = email.trim();
-  return (
-    val.length > 0 &&
-    val.length <= 254 &&
-    /@/.test(val) &&
-    val.split("@").length === 2 &&
-    val.split("@")[1].length > 0 &&
-    /\.[a-zA-Z]{2,}$/.test(val) &&
-    /^[^\s@]+@[^\s@]+$/.test(val)
-  );
-}  
+const validateEmail = async (req, res, next) => {
+  const { email } = req.body;
+  if (!email || typeof email !== "string") {
+      return res.status(400).json({ error: "Email is required." });
+    }
+
+    const trimmed = email.trim();
+
+    if (trimmed.length > 254) {
+      return res.status(400).json({ error: "Email is too long." });
+    }
+
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(trimmed)) {
+      return res.status(400).json({ error: "Invalid email format." });
+    }
+
+    req.body.email = trimmed; // normalize before it hits the route
+    next();
+  } 
 
 module.exports = { requireAuth, validateEmail };
