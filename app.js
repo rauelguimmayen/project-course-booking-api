@@ -83,7 +83,7 @@ async function doLogin() {
 
 async function doRegister() {
   const name    = document.getElementById("reg-name").value.trim();
-  const emailInput   = document.getElementById("reg-email").value.trim();
+  const email   = document.getElementById("reg-email").value.trim();
   const pass    = document.getElementById("reg-password").value;
   const confirm = document.getElementById("reg-confirm").value;
   const errEl   = document.getElementById("reg-error");
