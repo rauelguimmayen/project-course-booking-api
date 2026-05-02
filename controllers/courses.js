@@ -1,9 +1,10 @@
 const Course = require("../models/Course");
-
+const allowed = 
 //Get All Courses
 module.exports.getAllCourse = async (req, res) => {
   try {
-    const courses = await Course.find().sort({ id: 1 });
+    const courses = await Course.find({}, { color: 0, icon: 0 });
+    //const courses = await Course.find().sort({ id: 1 });
     res.json(courses);
   } catch (err) {
     res.status(500).json({ error: err.message });
