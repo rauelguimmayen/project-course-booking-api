@@ -2,15 +2,15 @@ const express     = require("express");
 const router      = express.Router();
 const bcrypt      = require("bcryptjs");
 const User        = require("../models/User");
-const requireAuth = require("../middleware/auth");
+const { requireAuth, validateEmail } = require("../middleware/auth");
 const userController = require("../controllers/auth");
 
 
 // POST /api/auth/register
-router.post("/register", userController.registerUser);
+router.post("/register", validateEmail, userController.registerUser);
 
 // POST /api/auth/login
-router.post("/login", userController.userLogin);
+router.post("/login", validateEmail, userController.userLogin);
 
 // POST /api/auth/logout
 router.post("/logout", userController.userLogout);

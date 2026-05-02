@@ -1,5 +1,5 @@
 const Course = require("../models/Course");
-const allowed = 
+
 //Get All Courses
 module.exports.getAllCourse = async (req, res) => {
   try {

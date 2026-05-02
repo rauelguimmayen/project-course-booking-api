@@ -1,17 +1,7 @@
-const express     = require("express");
-const router      = express.Router();
-const Course      = require("../models/Course");
-const { requireAuth } = require("../middleware/auth");
-const courseController = require("../controllers/courses");
+const Course = require("../models/Course");
 
-// GET /api/courses
-router.get("/", courseController.getAllCourse);
 
-// GET /api/courses/:id
-router.get("/:id", courseController.findCourse);
-
-/*// POST /api/courses/:id/enroll
-router.post("/:id/enroll", requireAuth, async (req, res) => {
+module.exports.enrollCourse = async (req, res) => {
   const courseId = Number(req.params.id);
   try {
     const course = await Course.findOne({ id: courseId });
@@ -29,10 +19,9 @@ router.post("/:id/enroll", requireAuth, async (req, res) => {
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
-});*/
+};
 
-// POST /api/courses/:id/unenroll
-/*router.post("/:id/unenroll", requireAuth, async (req, res) => {
+module.exports.unenrollCourse = async (req, res) => {
   const courseId = Number(req.params.id);
   try {
     const course = await Course.findOne({ id: courseId });
@@ -49,6 +38,4 @@ router.post("/:id/enroll", requireAuth, async (req, res) => {
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
-});*/
-
-module.exports = router;
+};

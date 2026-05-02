@@ -13,4 +13,24 @@ const requireAuth = async (req, res, next) => {
   }
 };
 
-module.exports = requireAuth;
+function validateEmail(email) {
+  if (!email || typeof email !== "string") {
+    return { valid: false, message: "Email is required." };
+  }
+
+  const trimmed = email.trim();
+
+  // Must follow standard email format: local@domain.tld
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+  if (!emailRegex.test(trimmed)) {
+    return { valid: false, message: "Invalid email format." };
+  }
+
+  if (trimmed.length > 254) {
+    return { valid: false, message: "Email is too long." };
+  }
+
+  return { valid: true, message: "Email is valid." };
+}
+module.exports = {requireAuth , validateEmail};
