@@ -14,25 +14,19 @@ const requireAuth = async (req, res, next) => {
   }
 };
 
-/*function validateEmail(email) {
-  if (!email || typeof email !== "string") {
-    return { valid: false, notification.notify(`Email is required.`)};
-   // return { valid: false, message: "Email is required." };
-  }
+// ═══════════════ EMAIL VALIDATION ═══════════════
+const validateEmail = async (req, res) => {
+  if (!email || typeof email !== "string") return false;
+  const val = email.trim();
+  return (
+    val.length > 0 &&
+    val.length <= 254 &&
+    /@/.test(val) &&
+    val.split("@").length === 2 &&
+    val.split("@")[1].length > 0 &&
+    /\.[a-zA-Z]{2,}$/.test(val) &&
+    /^[^\s@]+@[^\s@]+$/.test(val)
+  );
+}  
 
-  const trimmed = email.trim();
-
-  // Must follow standard email format: local@domain.tld
-  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
-  if (!emailRegex.test(trimmed)) {
-    return { valid: false, notification.notify("Invalid email format.")};
-  }
-
-  if (trimmed.length > 254) {
-    return { valid: false, message: "Email is too long." };
-  }
-
-  return { valid: true, message: "Email is valid." };
-}*/
-module.exports = requireAuth;
+module.exports = { requireAuth, validateEmail };

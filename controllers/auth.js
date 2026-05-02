@@ -1,6 +1,7 @@
 const bcrypt      = require("bcryptjs");
 const User        = require("../models/User");
-const requireAuth = require("../middleware/auth");
+const {requireAuth} = require("../middleware/auth");
+
 
 const SALT_ROUNDS = 10;
 

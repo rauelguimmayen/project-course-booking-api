@@ -95,7 +95,7 @@ async function doLogin() {
     showErr(errEl, err.error || "Login failed.");
   }
 }
-
+const { validateEmail } = require("./middleware/auth");
 async function doRegister() {
   const name    = document.getElementById("reg-name").value.trim();
   const emailInput   = document.getElementById("reg-email").value.trim();
