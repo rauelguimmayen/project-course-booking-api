@@ -35,21 +35,6 @@ function notify(msg, type = "success") {
   el._t = setTimeout(() => { el.style.display = "none"; }, 3000);
 }
 
-// ═══════════════ EMAIL VALIDATION ═══════════════
-function validateEmail(email) {
-  if (!email || typeof email !== "string") return false;
-  const val = email.trim();
-  return (
-    val.length > 0 &&
-    val.length <= 254 &&
-    /@/.test(val) &&
-    val.split("@").length === 2 &&
-    val.split("@")[1].length > 0 &&
-    /\.[a-zA-Z]{2,}$/.test(val) &&
-    /^[^\s@]+@[^\s@]+$/.test(val)
-  );
-}   
-
 // ═══════════════ NAVIGATION ═══════════════
 function navigate(page) {
   document.querySelectorAll(".page").forEach(p => p.classList.remove("active"));
