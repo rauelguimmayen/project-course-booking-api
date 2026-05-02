@@ -6,7 +6,7 @@ const path         = require("path");
 const connectDB    = require("./config/db");
 const authRoutes   = require("./routes/auth");
 const courseRoutes = require("./routes/courses");
-const MongoStore   = require("connect-mongo");
+const MongoStore   = require("connect-mongo").default;
 const mongoose     = require("mongoose");
 const app = express();
 
@@ -19,7 +19,7 @@ app.use(cors({
 const isProduction = process.env.NODE_ENV === 'production';
 app.use(session({
   // 1. Point to your MongoDB
-  store: MongoStore.create({ 
+  store: new MongoStore({ 
     mongoUrl: process.env.MONGODB_STRING,
     // This ensures the session is saved to the DB before the warning triggers
     autoRemove: 'native' 
