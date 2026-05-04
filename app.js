@@ -331,3 +331,36 @@ document.addEventListener("DOMContentLoaded", async () => {
   renderNav();
   navigate(currentUser ? "dashboard" : "home");
 });
+
+ // ═══════════════ GOOGLE SIGN-IN ═══════════════ 
+function handleGoogleSignIn(response) {
+  const payload = JSON.parse(atob(response.credential.split('.')[1]));
+
+  const email   = payload.email;
+  const name    = payload.name;
+  const picture = payload.picture;
+
+  const users = getUsers();
+
+  if (!users[email]) {
+    const newUser = {
+      name,
+      email,
+      password: null,
+      picture,
+      enrolled: [],
+      joinedAt: new Date().toISOString(),
+      authProvider: "google"
+    };
+    users[email] = newUser;
+    saveUsers(users);
+    notify(`Account created! Welcome, ${name}!`);
+  } else {
+    notify(`Welcome back, ${users[email].name}!`);
+  }
+
+  currentUser = users[email];
+  saveSession(currentUser);
+  navigate("dashboard");
+  renderNav();
+}

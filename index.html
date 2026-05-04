@@ -7,6 +7,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
   <link rel="stylesheet" type="text/css" href="./index.css">
+  <script src="https://accounts.google.com/gsi/client" async defer></script>
 </head>
 <body>
 
@@ -76,6 +77,18 @@
         <input id="login-password" type="password" placeholder="••••••••" />
         <div class="error-msg" id="login-error"></div>
         <button class="btn-primary" style="width:100%;margin-top:.5rem;" onclick="doLogin()">Log In</button>
+          <div id="g_id_onload" data-client_id="243140908716-dibufv5f41qtkphd8huk08rq1vfms699.apps.googleusercontent.com" data-callback="handleGoogleSignIn"
+          data-auto_prompt="false">
+          </div>
+          <div class="g_id_signin"
+            data-type="standard"
+            data-shape="rectangular"
+            data-theme="outline"
+            data-text="continue_with"
+            data-size="large"
+            data-width="100%">
+          </div>
+        </div>
       </div>
       <p class="auth-switch">Don't have an account? <button class="link-btn" onclick="navigate('register')">Sign up free</button></p>
     </div>
@@ -99,6 +112,18 @@
         <input id="reg-confirm" type="password" placeholder="Repeat password" />
         <div class="error-msg" id="reg-error"></div>
         <button class="btn-primary" style="width:100%;margin-top:.5rem;" onclick="doRegister()">Create Account</button>
+          <div id="g_id_onload" data-client_id="243140908716-dibufv5f41qtkphd8huk08rq1vfms699.apps.googleusercontent.com" data-callback="handleGoogleSignIn"
+          data-auto_prompt="false">
+          </div>
+          <div class="g_id_signin"
+            data-type="standard"
+            data-shape="rectangular"
+            data-theme="outline"
+            data-text="continue_with"
+            data-size="large"
+            data-width="100%">
+          </div>
+        </div>
       </div>
       <p class="auth-switch">Already have an account? <button class="link-btn" onclick="navigate('login')">Log in</button></p>
     </div>
